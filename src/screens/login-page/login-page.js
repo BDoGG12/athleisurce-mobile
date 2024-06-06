@@ -1,19 +1,27 @@
-// SignUpForm.js
+// LoginForm.js
 import React, { useState } from 'react';
 import { View, Text, TextInput, Button, StyleSheet } from 'react-native';
+import { login } from "../../api/authApi";
 
-const SignUp = ({ onSubmit }) => {
+const LogInPage = ({ navigation }) => {
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
+  const [errorMessage, setErrorMessage] = useState('');
 
-  const handleSignUp = () => {
+  const handleLogin = async () => {
     // Validation logic can be added here
-    onSubmit({ email, password });
+    try {
+      const res = await login(email, password);
+      console.log(res.data);
+      navigation.navigate('Home');
+    } catch (e) {
+      setErrorMessage('Login failed. Please check your credentials.');
+    }
   };
 
   return (
     <View style={styles.container}>
-      <Text style={styles.title}>Sign Up</Text>
+      <Text style={styles.title}>Login</Text>
       <TextInput
         style={styles.input}
         placeholder="Email"
@@ -29,7 +37,8 @@ const SignUp = ({ onSubmit }) => {
         onChangeText={setPassword}
         secureTextEntry
       />
-      <Button title="Sign Up" onPress={handleSignUp} />
+      {errorMessage ? <Text style={styles.error}>{errorMessage}</Text> : null}
+      <Button title="Login" onPress={handleLogin} />
     </View>
   );
 };
@@ -50,6 +59,10 @@ const styles = StyleSheet.create({
     marginBottom: 10,
     paddingHorizontal: 10,
   },
+  error: {
+    color: 'red',
+    marginBottom: 12
+  }
 });
 
-export default SignUp;
+export default LogInPage;

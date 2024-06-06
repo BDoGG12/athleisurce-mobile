@@ -1,19 +1,19 @@
-// LoginForm.js
+// SignUpForm.js
 import React, { useState } from 'react';
 import { View, Text, TextInput, Button, StyleSheet } from 'react-native';
 
-const LogIn = ({ onSubmit }) => {
+const SignUpPage = ({ onSubmit }) => {
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
 
-  const handleLogin = () => {
+  const handleSignUp = () => {
     // Validation logic can be added here
     onSubmit({ email, password });
   };
 
   return (
     <View style={styles.container}>
-      <Text style={styles.title}>Login</Text>
+      <Text style={styles.title}>Sign Up</Text>
       <TextInput
         style={styles.input}
         placeholder="Email"
@@ -29,7 +29,7 @@ const LogIn = ({ onSubmit }) => {
         onChangeText={setPassword}
         secureTextEntry
       />
-      <Button title="Login" onPress={handleLogin} />
+      <Button title="Sign Up" onPress={handleSignUp} />
     </View>
   );
 };
@@ -52,4 +52,4 @@ const styles = StyleSheet.create({
   },
 });
 
-export default LogIn;
+export default SignUpPage;
