@@ -2,13 +2,13 @@
 import React, { useState } from 'react';
 import { View, Text, TextInput, Button, StyleSheet } from 'react-native';
 
-const SignUpPage = ({ onSubmit }) => {
+const SignUpPage = ({ navigation }) => {
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
+  const [error, setError] = useState('');
 
-  const handleSignUp = () => {
-    // Validation logic can be added here
-    onSubmit({ email, password });
+  const handleSignUp = async () => {
+    console.log('sign up occurred');
   };
 
   return (
@@ -30,6 +30,7 @@ const SignUpPage = ({ onSubmit }) => {
         secureTextEntry
       />
       <Button title="Sign Up" onPress={handleSignUp} />
+      {error ? <Text>{error}</Text> : null}
     </View>
   );
 };
